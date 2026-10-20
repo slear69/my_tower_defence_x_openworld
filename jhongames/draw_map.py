@@ -24,8 +24,9 @@ def load_path(filename, offsetx, offsety, prefix="path"):
     for layer in tmx_map.layers:
         if isinstance(layer, pytmx.TiledObjectGroup) and layer.name.startswith(prefix):
             points=sorted(layer , key=lambda o: o.id)
-            path.append([(o.x + offsetx , o.y + offsety) for o in points])
-        return path
+            if len (points) >= 2:
+                path.append([(o.x + offsetx , o.y + offsety) for o in points])
+    return path
     
 
 class Sprite(pygame.sprite.Sprite):
